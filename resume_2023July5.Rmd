@@ -1,0 +1,266 @@
+---
+title: "Johnathan Jia's resume"
+author: Johnathan Jia
+date: "`r Sys.Date()`"
+output:
+  pagedown::html_resume:
+    # set it to true for a self-contained HTML page but it'll take longer to render
+    self_contained: false
+    css:
+      - css/custom_resume.css #custom resume functions
+      - css/styles.css #override styles
+      - resume #default file
+# uncomment this line to produce HTML and PDF in RStudio:
+knit: pagedown::chrome_print
+---
+
+```{r, include=FALSE}
+knitr::opts_chunk$set(
+  results='asis', 
+  echo = FALSE
+)
+library(tidyverse)
+library(glue)
+
+# ======================================================================
+# These variables determine how the the data is loaded and how the exports are
+# done.
+
+# Is data stored in google sheets? If no data will be gather from the csv/
+# folder in project
+using_googlesheets <- FALSE
+
+# Just the copied URL from the sheet
+positions_sheet_loc <- "https://docs.google.com/spreadsheets/d/14MQICF2F8-vf8CKPF1m4lyGKO6_thG-4aSwat1e2TWc"
+
+# Is this sheet available for anyone to read? If you're using a private sheet
+# set this to false and go to gather_data.R and run the data loading manually
+# once to cache authentication
+sheet_is_publicly_readable <- TRUE
+
+# Is the goal of this knit to build a document that is exported to PDF? If so
+# set this to true to have links turned into footnotes at the end of the
+# document
+PDF_EXPORT <- FALSE
+
+
+# A global (gasp) variable that holds all the links that were inserted for
+# placement at the end
+links <- c()
+
+# ======================================================================
+# Now we source two external scripts. One contains functions for building the
+# text output and the other loads up our data from either googlesheets or csvs
+
+# Functions for building sections from CSV data
+source('parsing_functions.R') 
+
+# Load data for CV/Resume
+source('gather_data.R')
+
+# Now we just need to filter down the position data to include less verbose
+# categories and only the entries we have designated for the resume
+position_data <- position_data %>% 
+  filter(in_resume) %>% 
+  mutate(
+    # Build some custom sections by collapsing others
+    section = case_when(
+      section %in% c('research_positions', 'industry_positions') ~ 'positions', 
+      section %in% c('data_science_writings', 'by_me_press') ~ 'writings',
+      TRUE ~ section
+    )
+  ) 
+```
+
+
+Aside
+================================================================================
+
+
+![Johnathan Jia](https://avatars.githubusercontent.com/u/83188410?v=4){width=80%}
+
+
+Contact Info {#contact}
+--------------------------------------------------------------------------------
+
+- <i class="fa fa-envelope"></i> jdjia93@gmail.com  
+- <i class="fa fa-github"></i> [github.com/jjia1](https://github.com/jjia1)
+- <i class="fa fa-phone"></i> 832-361-0388
+
+Skills {#skills}
+--------------------------------------------------------------------------------
+```{r}
+build_skill_bars(skills)
+```
+
+Disclaimer {#disclaimer}
+--------------------------------------------------------------------------------
+
+This resume was made with the R package [**pagedown**](https://github.com/rstudio/pagedown).
+
+Last updated on `r Sys.Date()`.
+
+
+Main
+================================================================================
+
+Johnathan Jia {#title}
+--------------------------------------------------------------------------------
+### Currently searching for fulltime position
+
+I am currently working fulltime as a data analyst in the Liu lab at Baylor College
+of Medicine. My current projects include QC and analysis of brain organoid scRNA-seq
+data. I am also currently involved in an IMC project, working to enhance cancer signals
+using pipelines in Python. I am interested in a fulltime position as a data scientist 
+with broad interests including machine/deep learning, big data analysis, and LLMs.
+
+Professional Experience {data-icon=suitcase}
+--------------------------------------------------------------------------------
+
+### Data Analyst Associate
+
+Baylor College of Medicine
+Liu Lab
+
+Houston, TX
+
+Jan 2023 - Current
+
+::: concise
+- QC and analyzed scRNA-seq data from brain organoid tissues
+- Developed pipelines in Python and R for use
+- Pipeline for IMC Data Analysis 
+:::
+
+### Research Assistant I
+
+MD Anderson Cancer Center
+Immunotherapy Platform
+
+Houston, TX
+
+April 2019 - August 2020
+
+- Collected and prepared samples of blood, bone marrow, and tumor for storage and analysis
+
+Research Experience {data-icon=laptop}
+--------------------------------------------------------------------------------
+
+### Graduate Research Assistant
+
+UT Health Science Center at Houston Graduate School of Biomedical Sciences
+Zhao Lab
+
+Houston, TX
+
+January 2020 - December 2022
+
+::: concise
+- Developed DeepHTLV
+- Analyzed COVID-19 scRNA-seq data transcriptional programs using DrivAER
+- Wrote review of current COVID-19 scRNA-seq research
+:::
+
+### Undergraduate Research Assistant 
+
+Emory University
+Antia Lab
+
+Emory University 
+
+January 2012 - May 2015
+
+- Used deterministic and stochastic predator-prey equations to model viral infection dynamics
+
+Education {data-icon=graduation-cap data-concise=true}
+--------------------------------------------------------------------------------
+
+### University of Texas Health Science Center at Houston Graduate School of Biomedical Sciences
+
+M.S. in Quantitative Sciences
+
+Houston, TX
+
+August 2020 - December 2022
+
+Thesis: DeepHTLV: a deep learning model for detecting and elucidatinghuman T-cell
+leukemia virus type 1 integration sites
+
+### University of Texas Health Science Center McGovern School of Medicine
+
+Houston, TX
+
+August 2015 - May 2018
+
+### Emory University
+
+B.S. in Biology with High Honors, B.A. in Chemistry
+
+Houston, TX
+
+August 2011 - May 2015
+
+Thesis: Investigating heterogeneity in the dynamics of virus and immune response
+following a yellow fever vaccination
+
+
+Publications {data-icon=file}
+--------------------------------------------------------------------------------
+
+### Deep learning for detecting and elucidating human T-cell leukemia virus type 1 integration sites 
+
+Cell Patterns
+
+Houston, TX
+
+2023
+
+Haodong Xu and **Johnathan Jia**, Hyun-Hwan Jeong,Zhongming Zhao
+
+### Review of COVID-19 scRNA-seq technologies
+
+The Innovation
+
+Houston, TX
+
+2022 
+
+Wendao Liu, **Johnathan Jia**, Yulin Dai, Wenhao Chen, Guangsheng Pei,Qiheng Yan, Zhongming Zhao
+
+### Investigating Cellular Trajectories in the Severity of COVID-19 and Their Transcriptional Programs Using MachineLearning Approaches
+
+Genes
+
+Houston, TX
+
+2021
+
+Hyun-Hwan Jeong and **Johnathan Jia**, Yulin Dai, LukasSimon, Zhongming Zhao
+
+### What Controls the Acute Viral Infection Following Yellow Fever Vaccination?
+
+Bulletin of mathematical biology
+
+James Moore, Hasan Ahmed, **Johnathan Jia**, Rama Akondy, RafiAhmed, Rustom Antia
+
+Honors and Awards {data-icon=certificate}
+--------------------------------------------------------------------------------
+
+### Best presentation at QS Seminar 
+
+2022
+
+Best QS seminar presentation 
+
+
+### First prize at UTH GSBS Quantitative Sciences Retreat Poster Presentation
+
+2022
+
+First prize for pre-candidacy students
+
+### Rheumatology Research Foundation Research Award
+
+2026
+
+Awarded for Shenzhen AS cohort research
