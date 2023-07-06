@@ -22,7 +22,7 @@ if(using_googlesheets){
   position_data <- read_sheet(positions_sheet_loc, sheet = "positions")
   skills        <- read_sheet(positions_sheet_loc, sheet = "skills")
   text_blocks   <- read_sheet(positions_sheet_loc, sheet = "text_blocks")
-  contact_info  <- read_sheet(positions_sheet_loc, sheet = "contact_info", skip = 1)
+  contact_info  <- read_sheet(positions_sheet_loc, sheet = "contact_info")
   
 } else {
   
@@ -30,6 +30,6 @@ if(using_googlesheets){
   position_data <- read_csv("csv/positions.csv")
   skills        <- read_csv("csv/language_skills.csv")
   text_blocks   <- read_csv("csv/text_blocks.csv")
-  contact_info  <- read_csv("csv/contact_info.csv", skip = 1)
+  contact_info  <- read_csv("csv/contact_info.csv")
   
 }

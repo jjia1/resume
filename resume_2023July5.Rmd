@@ -76,16 +76,13 @@ position_data <- position_data %>%
 Aside
 ================================================================================
 
-
-<!--![Johnathan Jia](https://avatars.githubusercontent.com/u/83188410?v=4){width=80%}-->
-
+![Johnathan Jia](https://avatars.githubusercontent.com/u/83188410?v=4){width=40%}
 
 Contact Info {#contact}
 --------------------------------------------------------------------------------
-
-- <i class="fa fa-envelope"></i> jdjia93@gmail.com  
-- <i class="fa fa-github"></i> [github.com/jjia1](https://github.com/jjia1)
-- <i class="fa fa-phone"></i> 832-361-0388
+```{r}
+contact_info %>% glue_data("- <i class='fa fa-{icon}'></i> {contact}")
+```
 
 Skills {#skills}
 --------------------------------------------------------------------------------
@@ -93,20 +90,20 @@ Skills {#skills}
 build_skill_bars(skills)
 ```
 
-Publications {data-icon=file}
+Publications {#publications}
 --------------------------------------------------------------------------------
 
 #### Deep learning for detecting and elucidating human T-cell leukemia virus type 1 integration sites (Cell Patterns 2023)
-H.Xu and **J.Jia**, H.Jeong,Z.Z
+##### H.Xu and **J.Jia**, H.Jeong,Z.Z
 
 #### Delineating COVID-19 immunological features using single-cell RNA sequencing (The Innovation 2022)
-W.Liu, **J.Jia**, Y.Dai, W.Chen, G.Pei,Q.Yan, Z.Zhao
+##### W.Liu, **J.Jia**, Y.Dai, W.Chen, G.Pei,Q.Yan, Z.Zhao
 
 #### Investigating Cellular Trajectories in the Severity of COVID-19 and Their Transcriptional Programs Using Machine Learning Approaches (Genes 2021)
-H.Jeong and **J.Jia**, Y.Dai, L.Simon, Z.Zhao
+##### H.Jeong and **J.Jia**, Y.Dai, L.Simon, Z.Zhao
 
 #### What Controls the Acute Viral Infection Following Yellow Fever Vaccination? (Bulletin of Mathematical Biology 2016)
-J.Moore, H.Ahmed, **J.Jia**, R.Akondy, R.Ahmed, R.Antia
+##### J.Moore, H.Ahmed, **J.Jia**, R.Akondy, R.Ahmed, R.Antia
 
 
 Disclaimer {#disclaimer}
@@ -122,7 +119,6 @@ Main
 Johnathan Jia {#title}
 --------------------------------------------------------------------------------
 ### Currently searching for fulltime position
-
 ```{r}
 print_text_block(text_blocks, 'intro')
 ```
@@ -146,7 +142,6 @@ Education {data-icon=graduation-cap data-concise=true}
 position_data %>% print_section('education')
 ```
 
-
 Honors and Awards {data-icon=certificate}
 --------------------------------------------------------------------------------
 
@@ -157,8 +152,6 @@ Best QS seminar presentation
 Houston, TX
 
 2022
-
-
 
 ### First prize at UTH GSBS Quantitative Sciences Retreat Poster Presentation
 

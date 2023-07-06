@@ -12,8 +12,19 @@ body {
 h1,
 h2,
 h3 {
-  font-family: "Playfair Display", serif;
+  font-family: "Arial", serif;
   color: #000;
+}
+
+h4 {
+  margin-bottom: 0.1rem;
+  padding-bottom: 0.1rem;
+}
+
+h5 {
+  margin:0;
+  padding:0;
+  font-weight: normal !important;
 }
 
 /* When in PDF export mode make sure superscripts are nice and small and italic */
@@ -79,13 +90,13 @@ sup {
 /* Make sure elements in asside are centered and have a nice small text */
 .aside {
   width: calc(var(--sidebar-width) + 9px);
-  line-height: 1.2;
+  line-height: 1;
   font-size: 0.75rem;
 }
 
 /* Make little circle outline be a light blue */
 .decorator::after {
-  background-color: #08306b;
+  background-color: #000;
 }
 
 /* Remove the fake bullets from lists */
