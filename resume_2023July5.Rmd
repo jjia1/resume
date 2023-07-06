@@ -28,10 +28,10 @@ library(glue)
 
 # Is data stored in google sheets? If no data will be gather from the csv/
 # folder in project
-using_googlesheets <- FALSE
+using_googlesheets <- TRUE
 
 # Just the copied URL from the sheet
-positions_sheet_loc <- "https://docs.google.com/spreadsheets/d/14MQICF2F8-vf8CKPF1m4lyGKO6_thG-4aSwat1e2TWc"
+positions_sheet_loc <- "https://docs.google.com/spreadsheets/d/1Dw4SfMmSLxjvs8-slv77KVzospBS7cglQBV2NAXlAGY/"
 
 # Is this sheet available for anyone to read? If you're using a private sheet
 # set this to false and go to gather_data.R and run the data loading manually
@@ -77,7 +77,7 @@ Aside
 ================================================================================
 
 
-![Johnathan Jia](https://avatars.githubusercontent.com/u/83188410?v=4){width=80%}
+<!--![Johnathan Jia](https://avatars.githubusercontent.com/u/83188410?v=4){width=80%}-->
 
 
 Contact Info {#contact}
@@ -93,13 +93,28 @@ Skills {#skills}
 build_skill_bars(skills)
 ```
 
+Publications {data-icon=file}
+--------------------------------------------------------------------------------
+
+#### Deep learning for detecting and elucidating human T-cell leukemia virus type 1 integration sites (Cell Patterns 2023)
+H.Xu and **J.Jia**, H.Jeong,Z.Z
+
+#### Delineating COVID-19 immunological features using single-cell RNA sequencing (The Innovation 2022)
+W.Liu, **J.Jia**, Y.Dai, W.Chen, G.Pei,Q.Yan, Z.Zhao
+
+#### Investigating Cellular Trajectories in the Severity of COVID-19 and Their Transcriptional Programs Using Machine Learning Approaches (Genes 2021)
+H.Jeong and **J.Jia**, Y.Dai, L.Simon, Z.Zhao
+
+#### What Controls the Acute Viral Infection Following Yellow Fever Vaccination? (Bulletin of Mathematical Biology 2016)
+J.Moore, H.Ahmed, **J.Jia**, R.Akondy, R.Ahmed, R.Antia
+
+
 Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
 This resume was made with the R package [**pagedown**](https://github.com/rstudio/pagedown).
 
 Last updated on `r Sys.Date()`.
-
 
 Main
 ================================================================================
@@ -108,159 +123,55 @@ Johnathan Jia {#title}
 --------------------------------------------------------------------------------
 ### Currently searching for fulltime position
 
-I am currently working fulltime as a data analyst in the Liu lab at Baylor College
-of Medicine. My current projects include QC and analysis of brain organoid scRNA-seq
-data. I am also currently involved in an IMC project, working to enhance cancer signals
-using pipelines in Python. I am interested in a fulltime position as a data scientist 
-with broad interests including machine/deep learning, big data analysis, and LLMs.
+```{r}
+print_text_block(text_blocks, 'intro')
+```
 
 Professional Experience {data-icon=suitcase}
 --------------------------------------------------------------------------------
+```{r}
+position_data %>% print_section('professional')
+```
 
-### Data Analyst Associate
-
-Baylor College of Medicine
-Liu Lab
-
-Houston, TX
-
-Jan 2023 - Current
-
-::: concise
-- QC and analyzed scRNA-seq data from brain organoid tissues
-- Developed pipelines in Python and R for use
-- Pipeline for IMC Data Analysis 
-:::
-
-### Research Assistant I
-
-MD Anderson Cancer Center
-Immunotherapy Platform
-
-Houston, TX
-
-April 2019 - August 2020
-
-- Collected and prepared samples of blood, bone marrow, and tumor for storage and analysis
-
-Research Experience {data-icon=laptop}
+Research Experience {data-icon=suitcase}
 --------------------------------------------------------------------------------
-
-### Graduate Research Assistant
-
-UT Health Science Center at Houston Graduate School of Biomedical Sciences
-Zhao Lab
-
-Houston, TX
-
-January 2020 - December 2022
-
-::: concise
-- Developed DeepHTLV
-- Analyzed COVID-19 scRNA-seq data transcriptional programs using DrivAER
-- Wrote review of current COVID-19 scRNA-seq research
-:::
-
-### Undergraduate Research Assistant 
-
-Emory University
-Antia Lab
-
-Emory University 
-
-January 2012 - May 2015
-
-- Used deterministic and stochastic predator-prey equations to model viral infection dynamics
+```{r}
+position_data %>% print_section('research')
+```
 
 Education {data-icon=graduation-cap data-concise=true}
 --------------------------------------------------------------------------------
 
-### University of Texas Health Science Center at Houston Graduate School of Biomedical Sciences
+```{r}
+position_data %>% print_section('education')
+```
 
-M.S. in Quantitative Sciences
-
-Houston, TX
-
-August 2020 - December 2022
-
-Thesis: DeepHTLV: a deep learning model for detecting and elucidatinghuman T-cell
-leukemia virus type 1 integration sites
-
-### University of Texas Health Science Center McGovern School of Medicine
-
-Houston, TX
-
-August 2015 - May 2018
-
-### Emory University
-
-B.S. in Biology with High Honors, B.A. in Chemistry
-
-Houston, TX
-
-August 2011 - May 2015
-
-Thesis: Investigating heterogeneity in the dynamics of virus and immune response
-following a yellow fever vaccination
-
-
-Publications {data-icon=file}
---------------------------------------------------------------------------------
-
-### Deep learning for detecting and elucidating human T-cell leukemia virus type 1 integration sites 
-
-Cell Patterns
-
-Houston, TX
-
-2023
-
-Haodong Xu and **Johnathan Jia**, Hyun-Hwan Jeong,Zhongming Zhao
-
-### Review of COVID-19 scRNA-seq technologies
-
-The Innovation
-
-Houston, TX
-
-2022 
-
-Wendao Liu, **Johnathan Jia**, Yulin Dai, Wenhao Chen, Guangsheng Pei,Qiheng Yan, Zhongming Zhao
-
-### Investigating Cellular Trajectories in the Severity of COVID-19 and Their Transcriptional Programs Using MachineLearning Approaches
-
-Genes
-
-Houston, TX
-
-2021
-
-Hyun-Hwan Jeong and **Johnathan Jia**, Yulin Dai, LukasSimon, Zhongming Zhao
-
-### What Controls the Acute Viral Infection Following Yellow Fever Vaccination?
-
-Bulletin of mathematical biology
-
-James Moore, Hasan Ahmed, **Johnathan Jia**, Rama Akondy, RafiAhmed, Rustom Antia
 
 Honors and Awards {data-icon=certificate}
 --------------------------------------------------------------------------------
 
 ### Best presentation at QS Seminar 
 
+Best QS seminar presentation 
+
+Houston, TX
+
 2022
 
-Best QS seminar presentation 
 
 
 ### First prize at UTH GSBS Quantitative Sciences Retreat Poster Presentation
 
-2022
-
 First prize for pre-candidacy students
+
+Houston, TX
+
+2022
 
 ### Rheumatology Research Foundation Research Award
 
-2026
+Awarded for Establishing Shenzhen Ankylosing Spondylitis Cohort
 
-Awarded for Shenzhen AS cohort research
+Houston, TX
+
+2016
