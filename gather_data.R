@@ -23,13 +23,15 @@ if(using_googlesheets){
   skills        <- read_sheet(positions_sheet_loc, sheet = "skills")
   text_blocks   <- read_sheet(positions_sheet_loc, sheet = "text_blocks")
   contact_info  <- read_sheet(positions_sheet_loc, sheet = "contact_info")
+  honors_awards <- read_sheet(positions_sheet_loc, sheet = "honors_awards")
   
 } else {
   
   # Want to go oldschool with just a csv?
   position_data <- read_csv("csv/positions.csv")
-  skills        <- read_csv("csv/language_skills.csv")
+  skills        <- read_csv("csv/skills.csv")
   text_blocks   <- read_csv("csv/text_blocks.csv")
   contact_info  <- read_csv("csv/contact_info.csv")
+  honors_awards <- read_csv("csv/honors_awards.csv")
   
 }

@@ -65,18 +65,15 @@ position_data <- position_data %>%
   mutate(
     # Build some custom sections by collapsing others
     section = case_when(
-      section %in% c('research_positions', 'industry_positions') ~ 'positions', 
+      section %in% c('research', 'industry') ~ 'positions', 
       section %in% c('data_science_writings', 'by_me_press') ~ 'writings',
       TRUE ~ section
     )
   ) 
 ```
 
-
 Aside
 ================================================================================
-
-![Johnathan Jia](https://avatars.githubusercontent.com/u/83188410?v=4){width=40%}
 
 Contact Info {#contact}
 --------------------------------------------------------------------------------
@@ -123,48 +120,20 @@ Johnathan Jia {#title}
 print_text_block(text_blocks, 'intro')
 ```
 
-Professional Experience {data-icon=suitcase}
+Professional Experience {data-icon=none}
 --------------------------------------------------------------------------------
 ```{r}
-position_data %>% print_section('professional')
+position_data %>% print_section('positions')
 ```
 
-Research Experience {data-icon=suitcase}
+Education {data-icon=none data-concise=true}
 --------------------------------------------------------------------------------
-```{r}
-position_data %>% print_section('research')
-```
-
-Education {data-icon=graduation-cap data-concise=true}
---------------------------------------------------------------------------------
-
 ```{r}
 position_data %>% print_section('education')
 ```
 
-Honors and Awards {data-icon=certificate}
+Awards {data-icon=none}
 --------------------------------------------------------------------------------
-
-### Best presentation at QS Seminar 
-
-Best QS seminar presentation 
-
-Houston, TX
-
-2022
-
-### First prize at UTH GSBS Quantitative Sciences Retreat Poster Presentation
-
-First prize for pre-candidacy students
-
-Houston, TX
-
-2022
-
-### Rheumatology Research Foundation Research Award
-
-Awarded for Establishing Shenzhen Ankylosing Spondylitis Cohort
-
-Houston, TX
-
-2016
+```{r}
+print_awards(honors_awards)
+```
