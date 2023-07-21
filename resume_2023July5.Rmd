@@ -87,7 +87,7 @@ Skills {#skills}
 build_skill_bars(skills)
 ```
 
-Publications {#publications}
+Awards/Publications {#publications}
 --------------------------------------------------------------------------------
 
 #### Deep learning for detecting and elucidating human T-cell leukemia virus type 1 integration sites (Cell Patterns 2023)
@@ -115,9 +115,9 @@ Main
 
 Johnathan Jia {#title}
 --------------------------------------------------------------------------------
-### Currently searching for fulltime position
+### Data scientist interested in development and implementation of new deep learning algorithms
 ```{r}
-print_text_block(text_blocks, 'intro')
+#print_text_block(text_blocks, 'intro')
 ```
 
 Professional Experience {data-icon=none}

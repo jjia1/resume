@@ -155,7 +155,5 @@ print_awards <- function(awards){
       "\n\n",
       "{timeline}", 
       "\n\n",
-      "{description_bullets}",
-      "\n\n",
     )
 }
