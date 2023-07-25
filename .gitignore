@@ -1,11 +1,12 @@
 .Rproj.user
 .Rproj
 .Rhistory
+!.Rproj
 .RData
 .Ruserdata
 .secrets
 .DS_Store
-csv/
-old/
-resume_2023July5_files/
-css/
+!old/
+!resume_2023July5_files/
+!css/
+!resume_2023July5.html
