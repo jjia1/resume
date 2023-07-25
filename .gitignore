@@ -3,4 +3,8 @@
 .RData
 .Ruserdata
 .secrets
-csv/.csv
+.DS_Store
+csv/
+old/
+!resume_2023_July5_files/
+css/
