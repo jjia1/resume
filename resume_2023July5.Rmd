@@ -43,7 +43,6 @@ sheet_is_publicly_readable <- FALSE
 # document
 PDF_EXPORT <- FALSE
 
-
 # A global (gasp) variable that holds all the links that were inserted for
 # placement at the end
 links <- c()
