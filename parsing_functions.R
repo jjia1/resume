@@ -77,7 +77,7 @@ print_section <- function(position_data, section_id){
       )
     ) %>% 
     strip_links_from_cols(c('title', 'description_bullets')) %>% 
-    mutate_all(~ifelse(is.na(.), 'N/A', .)) %>% 
+    mutate_all(~ifelse(is.na(.), '', .)) %>% 
     glue_data(
       "### {title}",
       "\n\n",
