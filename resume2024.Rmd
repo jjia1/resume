@@ -68,7 +68,10 @@ position_data <- position_data %>%
       section %in% c('data_science_writings', 'by_me_press') ~ 'writings',
       TRUE ~ section
     )
-  ) 
+  )
+
+  # also filter the skills categories
+skills <- skills %>% filter(in_resume) 
 ```
 
 Aside
@@ -77,13 +80,19 @@ Aside
 Contact Info {#contact}
 --------------------------------------------------------------------------------
 ```{r}
-contact_info %>% glue_data("- <i class='fa fa-{icon}'></i> {contact}")
+contact_info %>% glue_data("- <i class='fa fa-{icon}'></i> <a href='{contact}'>{text}</a>")
 ```
 
-Skills {#skills}
+Languages {#langs}
 --------------------------------------------------------------------------------
 ```{r}
-build_skill_bars(skills)
+build_skill_bars(skills, "language")
+```
+
+Packages {#pkgs}
+--------------------------------------------------------------------------------
+```{r}
+build_skill_bars(skills, "package")
 ```
 
 Publications {#publications}

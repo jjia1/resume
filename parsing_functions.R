@@ -93,10 +93,11 @@ print_section <- function(position_data, section_id){
 }
 
 # Construct a bar chart of skills
-build_skill_bars <- function(skills, out_of = 5){
+build_skill_bars <- function(skills, selection, out_of = 5){
   bar_color <- "#969696"
   bar_background <- "#d9d9d9"
-  skills %>% 
+  skills %>%
+    filter(type == selection) %>%
     mutate(width_percent = round(100*level/out_of)) %>% 
     glue_data(
       "<div class = 'skill-bar'",
