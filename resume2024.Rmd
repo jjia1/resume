@@ -5,11 +5,17 @@ date: "`r Sys.Date()`"
 output:
   pagedown::html_resume:
     # set it to true for a self-contained HTML page but it'll take longer to render
-    self_contained: false
+    self_contained: true
     css:
       - css/custom_resume.css #custom resume functions
       - css/styles.css #override styles
       - resume #default file
+  pdf_document:
+    # Optional: Customize PDF appearance
+    #  latex_engine: xelatex # For better font support
+    #  toc: true # Include a table of contents
+    #  toc_depth: 3 # Control how many levels of headings are in the TOC
+
 # uncomment this line to produce HTML and PDF in RStudio:
 knit: pagedown::chrome_print
 ---
@@ -70,7 +76,7 @@ position_data <- position_data %>%
     )
   )
 
-  # also filter the skills categories
+# also filter the skills categories
 skills <- skills %>% filter(in_resume) 
 ```
 
@@ -99,22 +105,27 @@ Publications {#publications}
 --------------------------------------------------------------------------------
 
 #### Deep learning for detecting and elucidating human T-cell leukemia virus type 1 integration sites (Cell Patterns 2023)
-##### H.Xu and **J.Jia**, H.Jeong,Z.Z
+##### H.Xu* and **J.Jia***, H.Jeong,Z.Z
 
 #### Delineating COVID-19 immunological features using single-cell RNA sequencing (The Innovation 2022)
 ##### W.Liu, **J.Jia**, Y.Dai, W.Chen, G.Pei,Q.Yan, Z.Zhao
 
 #### Investigating Cellular Trajectories in the Severity of COVID-19 and Their Transcriptional Programs Using Machine Learning Approaches (Genes 2021)
-##### H.Jeong and **J.Jia**, Y.Dai, L.Simon, Z.Zhao
+##### H.Jeong* and **J.Jia***, Y.Dai, L.Simon, Z.Zhao
 
 #### What Controls the Acute Viral Infection Following Yellow Fever Vaccination? (Bulletin of Mathematical Biology 2016)
 ##### J.Moore, H.Ahmed, **J.Jia**, R.Akondy, R.Ahmed, R.Antia
 
+Certificates {data-icon=none}
+--------------------------------------------------------------------------------
+```{r}
+print_certificates(certificates)
+```
 
-Disclaimer {#disclaimer}
+<!--Disclaimer {#disclaimer}
 --------------------------------------------------------------------------------
 
-This resume was made with the R package [**pagedown**](https://github.com/rstudio/pagedown).
+#This resume was made with the R package [**pagedown**](https://github.com/rstudio/pagedown). -->
 
 Last updated on `r Sys.Date()`.
 

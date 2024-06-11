@@ -158,3 +158,32 @@ print_awards <- function(awards){
       "\n\n",
     )
 }
+
+print_certificates <- function(certificates){
+  certificates %>% 
+    arrange(desc(date)) %>% 
+    mutate(id = 1:n()) %>% 
+    pivot_longer(
+      starts_with('description'),
+      names_to = 'description_num',
+      values_to = 'description'
+    ) %>% 
+    filter(!is.na(description) | description_num == 'description_1') %>%
+    group_by(id) %>% 
+    mutate(
+      descriptions = list(description),
+      no_descriptions = is.na(first(description))
+    ) %>% 
+    ungroup() %>% 
+    filter(description_num == 'description_1') %>% 
+    strip_links_from_cols(c('title')) %>% 
+    mutate_all(~ifelse(is.na(.), 'N/A', .)) %>% 
+    glue_data(
+      "### {title}",
+      "\n\n",
+      "{institution}",
+      "\n\n",
+      "{date}",
+      "\n\n",
+    )
+}
