@@ -5,7 +5,7 @@ date: "`r Sys.Date()`"
 output:
   pagedown::html_resume:
     # set it to true for a self-contained HTML page but it'll take longer to render
-    self_contained: true
+    self_contained: false
     css:
       - css/custom_resume.css #custom resume functions
       - css/styles.css #override styles
@@ -75,84 +75,75 @@ position_data <- position_data %>%
       TRUE ~ section
     )
   )
-
-# also filter the skills categories
-skills <- skills %>% filter(in_resume) 
 ```
 
-Aside
-================================================================================
+# Aside
 
-Contact Info {#contact}
---------------------------------------------------------------------------------
+## Contact Info {#contact}
+
 ```{r}
 contact_info %>% glue_data("- <i class='fa fa-{icon}'></i> <a href='{contact}'>{text}</a>")
 ```
 
-Languages {#langs}
---------------------------------------------------------------------------------
+## Programming Languages {#langs}
+
 ```{r}
 build_skill_bars(skills, "language")
 ```
 
-Packages {#pkgs}
---------------------------------------------------------------------------------
+## Core Skills {#skill}
+
+```{r}
+build_skill_bars(skills, "skill")
+```
+
+## Tools/Frameworks {#pkgs}
 ```{r}
 build_skill_bars(skills, "package")
 ```
 
-Publications {#publications}
---------------------------------------------------------------------------------
+## Publications {#publications}
+::: compact-publications
+```{r results='asis'}
+print_publications(publications)
+```
+:::
 
-#### Deep learning for detecting and elucidating human T-cell leukemia virus type 1 integration sites (Cell Patterns 2023)
-##### H.Xu* and **J.Jia***, H.Jeong,Z.Z
-
-#### Delineating COVID-19 immunological features using single-cell RNA sequencing (The Innovation 2022)
-##### W.Liu, **J.Jia**, Y.Dai, W.Chen, G.Pei,Q.Yan, Z.Zhao
-
-#### Investigating Cellular Trajectories in the Severity of COVID-19 and Their Transcriptional Programs Using Machine Learning Approaches (Genes 2021)
-##### H.Jeong* and **J.Jia***, Y.Dai, L.Simon, Z.Zhao
-
-#### What Controls the Acute Viral Infection Following Yellow Fever Vaccination? (Bulletin of Mathematical Biology 2016)
-##### J.Moore, H.Ahmed, **J.Jia**, R.Akondy, R.Ahmed, R.Antia
-
-Certificates {data-icon=none}
---------------------------------------------------------------------------------
-```{r}
+## Certificates {#certificates data-icon="none"}
+::: compact-certificates
+```{r results='asis'}
 print_certificates(certificates)
 ```
-
-<!--Disclaimer {#disclaimer}
---------------------------------------------------------------------------------
-
-#This resume was made with the R package [**pagedown**](https://github.com/rstudio/pagedown). -->
-
+:::
+<br>
 Last updated on `r Sys.Date()`.
 
-Main
-================================================================================
+# Main
 
-Johnathan Jia {#title}
---------------------------------------------------------------------------------
-### Data scientist interested in development and implementation of new deep learning algorithms
+## Johnathan Jia: Senior Data Analyst {#title}
+::: text-block-intro
 ```{r}
-#print_text_block(text_blocks, 'intro')
+print_text_block(text_blocks, 'intro')
 ```
-
-Professional Experience {data-icon=none}
---------------------------------------------------------------------------------
+:::
+## Professional Experience {data-icon="none" #professionalexp-title}
+::: professional-section
 ```{r}
 position_data %>% print_section('positions')
 ```
+:::
 
-Education {data-icon=none data-concise=true}
---------------------------------------------------------------------------------
+## Education {#education data-icon="none" data-concise="true" #education-title}
+::: education-section
 ```{r}
-position_data %>% print_section('education')
+position_data %>% print_education('education') 
 ```
+:::
 
-Awards {data-icon=none}
---------------------------------------------------------------------------------
+## Awards {data-icon="none" data-concise="true" #awards-title}
+::: awards-section
 ```{r}
 print_awards(honors_awards)
 ```
+:::
+ 
