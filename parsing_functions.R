@@ -67,12 +67,17 @@ print_section <- function(position_data, section_id){
     mutate(
       timeline = ifelse(
         is.na(start) | start == end,
-        end,
+        as.character(end),
         glue('{end} - {start}')
       ),
-      description_bullets = ifelse(
-        no_descriptions,
-        ' ',
+      timeline_center = ifelse(
+        is.na(start) | start == end,
+        end,
+        (end + start) / 2
+      ),
+        description_bullets = ifelse(
+        no_descriptions | !include_description,
+        '',
         map_chr(descriptions, ~paste('-', ., collapse = '\n'))
       )
     ) %>% 
@@ -88,15 +93,49 @@ print_section <- function(position_data, section_id){
       "{timeline}", 
       "\n\n",
       "{description_bullets}",
-      "\n\n",
+      "\n\n"
     )
 }
+
+print_education <- function(position_data, section_id){
+  position_data %>% 
+    filter(section == section_id) %>% 
+    arrange(desc(end)) %>% 
+    mutate(
+      timeline = ifelse(
+        is.na(start) | start == end,
+        end,
+        glue('{end} - {start}')
+      ),
+      # Check if include_description exists, if not, set it to TRUE
+      include_description = if("include_description" %in% names(.)) include_description else TRUE,
+      # Prepare description text
+      description_text = ifelse(include_description & !is.na(description_1), 
+                                paste0("\n\n", description_1),
+                                "")
+    ) %>% 
+    strip_links_from_cols(c('title')) %>% 
+    mutate_all(~ifelse(is.na(.), '', .)) %>% 
+    glue_data(
+      "### {title}",
+      "\n\n",
+      "{institution}",
+      "\n\n",
+      "{loc}",
+      "\n\n",
+      "{timeline}", 
+      "{description_text}",
+      "\n\n"
+    )
+}
+
 
 # Construct a bar chart of skills
 build_skill_bars <- function(skills, selection, out_of = 5){
   bar_color <- "#969696"
   bar_background <- "#d9d9d9"
   skills %>%
+    filter(in_resume) %>%
     filter(type == selection) %>%
     mutate(width_percent = round(100*level/out_of)) %>% 
     glue_data(
@@ -109,6 +148,26 @@ build_skill_bars <- function(skills, selection, out_of = 5){
     )
 }
 
+#build list of skills 
+build_skill_list <- function(skills, category) {
+  skills %>%
+    filter(category == !!category) %>%
+    skills <- skills %>% filter(in_resume) %>%
+    arrange(desc(level)) %>%
+    mutate(skill_level = case_when(
+      level >= 4 ~ "★★★",
+      level == 3 ~ "★★☆",
+      level <= 2 ~ "★☆☆"
+    )) %>%
+    glue_data(
+      "<div class='skill-item'>",
+      "<span class='skill-name'>{skill}</span>",
+      "<span class='skill-level'>{skill_level}</span>",
+      "</div>"
+    ) %>%
+    paste(collapse = "\n")
+}
+
 # Prints out from text_blocks spreadsheet blocks of text for the intro and asides. 
 print_text_block <- function(text_blocks, label){
   filter(text_blocks, loc == label)$text %>%
@@ -116,37 +175,19 @@ print_text_block <- function(text_blocks, label){
     cat()
 }
 
+#print awards
 print_awards <- function(awards){
-  awards %>% 
+  awards %>%
     arrange(desc(end)) %>% 
-    mutate(id = 1:n()) %>% 
-    pivot_longer(
-      starts_with('description'),
-      names_to = 'description_num',
-      values_to = 'description'
-    ) %>% 
-    filter(!is.na(description) | description_num == 'description_1') %>%
-    group_by(id) %>% 
-    mutate(
-      descriptions = list(description),
-      no_descriptions = is.na(first(description))
-    ) %>% 
-    ungroup() %>% 
-    filter(description_num == 'description_1') %>% 
     mutate(
       timeline = ifelse(
         is.na(start) | start == end,
         end,
         glue('{end} - {start}')
-      ),
-      description_bullets = ifelse(
-        no_descriptions,
-        ' ',
-        map_chr(descriptions, ~paste('-', ., collapse = '\n'))
       )
     ) %>% 
-    strip_links_from_cols(c('title', 'description_bullets')) %>% 
-    mutate_all(~ifelse(is.na(.), 'N/A', .)) %>% 
+    strip_links_from_cols(c('title')) %>% 
+    mutate_all(~ifelse(is.na(.), '', .)) %>% 
     glue_data(
       "### {title}",
       "\n\n",
@@ -160,30 +201,39 @@ print_awards <- function(awards){
 }
 
 print_certificates <- function(certificates){
-  certificates %>% 
-    arrange(desc(date)) %>% 
-    mutate(id = 1:n()) %>% 
-    pivot_longer(
-      starts_with('description'),
-      names_to = 'description_num',
-      values_to = 'description'
-    ) %>% 
-    filter(!is.na(description) | description_num == 'description_1') %>%
-    group_by(id) %>% 
-    mutate(
-      descriptions = list(description),
-      no_descriptions = is.na(first(description))
-    ) %>% 
-    ungroup() %>% 
-    filter(description_num == 'description_1') %>% 
-    strip_links_from_cols(c('title')) %>% 
-    mutate_all(~ifelse(is.na(.), 'N/A', .)) %>% 
+  certificates %>%
+    arrange(desc(date)) %>%
     glue_data(
-      "### {title}",
-      "\n\n",
-      "{institution}",
-      "\n\n",
-      "{date}",
-      "\n\n",
-    )
+      "**{title}** *{institution}* ({date})",
+      "\n\n"
+    ) %>%
+    paste(collapse = "") %>%  # Change this from "\n\n" to ""
+    cat()  # Add cat() to print without [1]
+}
+
+print_publications <- function(publications) {
+  publications %>%
+    arrange(desc(Year)) %>%
+    mutate(
+      Authors = str_replace_all(Authors, "J\\.Jia", "**J.Jia**"),
+      # Truncate the title if it's too long
+      Title = str_trunc(Title, 70, "right"),
+      # Format authors to include only the first few
+      Authors = map_chr(str_split(Authors, ","), ~ paste(head(.x, 3), collapse = ","))
+    ) %>%
+    glue_data(
+      "**{Title}** *{Journal}* ({Year})",
+      "\n",
+      "{Authors}",
+      "\n"
+    ) %>%
+    paste(collapse = "\n\n") %>%
+    cat()
+}
+# print text block
+print_text_block <- function(text_blocks, label) {
+  filter(text_blocks, loc == label)$text %>%
+    sanitize_links() %>%
+    paste() %>%
+    cat()
 }
