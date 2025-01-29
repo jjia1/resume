@@ -1,4 +1,4 @@
 # Resume
-Resume for me 
+Old automated CV
 
-Date July 5th 2023
+# No longer in use 1/28/2025
